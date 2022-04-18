@@ -1,0 +1,240 @@
+---
+title: "BasicGraphs"
+output: html_document
+---
+
+# Initialize and load file
+```{r}
+
+setwd("~/ans198/ans198 project") # set working directory
+library(ggplot2)
+
+#list.files()
+
+forbesraw <- read.csv("ForbesAmericasTopColleges2019.csv") # read in .csv file
+
+summary(forbesraw)
+
+```
+
+# File info
+```{r}
+
+nrow(forbesraw)
+ncol(forbesraw)
+
+colnames(forbesraw)
+
+#str(forbesraw)
+```
+
+# Plot undergraduate population vs rank
+```{r}
+
+xval <- forbesraw$Student.Population
+yval <- forbesraw$Rank
+
+titlelab = "Undergraduate Population vs Rank"
+xlab = "Undergraduate Population"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("undergrad_pop.png")
+
+```
+
+# Plot student population vs rank
+```{r}
+
+xval <- forbesraw$Student.Population
+yval <- forbesraw$Rank
+
+titlelab = "Student Population vs Rank"
+xlab = "Student Population"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("student_pop.png")
+
+```
+
+# Plot net price (excluding financial aid) vs rank
+```{r}
+
+xval <- forbesraw$Net.Price
+yval <- forbesraw$Rank
+
+titlelab = "Net Price vs Rank"
+xlab = "Net Price"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("net_price.png")
+
+```
+
+# Plot
+```{r}
+
+xval <- forbesraw$Average.Grant.Aid
+yval <- forbesraw$Rank
+
+titlelab = "Average Grant Aid vs Rank"
+xlab = "Average Grant Aid"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("avg_grant_aid.png")
+
+```
+
+
+# Plot total annual cost vs rank
+```{r}
+
+xval <- forbesraw$Total.Annual.Cost
+yval <- forbesraw$Rank
+
+titlelab = "Total Annual Cost vs Rank"
+xlab = "Total Annual Cost"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("total_annual_cost.png")
+
+```
+
+# Plot alumni salary vs rank
+```{r}
+
+xval <- forbesraw$Alumni.Salary
+yval <- forbesraw$Rank
+
+titlelab = "Alumni Salary vs Rank"
+xlab = "Alumni Salary"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("alumni_salary.png")
+
+```
+
+# Plot acceptance rate vs rank
+```{r}
+
+xval <- forbesraw$Acceptance.Rate
+yval <- forbesraw$Rank
+
+titlelab = "Acceptance Rate vs Rank"
+xlab = "Acceptance Rate"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("accept_rate.png")
+
+```
+
+# Plot SAT lower vs rank
+```{r}
+
+xval <- forbesraw$SAT.Lower
+yval <- forbesraw$Rank
+
+titlelab = "SAT Lower vs Rank"
+xlab = "SAT Lower"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("sat_lower.png")
+
+```
+
+# Plot SAT upper vs rank
+```{r}
+
+xval <- forbesraw$SAT.Upper
+yval <- forbesraw$Rank
+
+titlelab = "SAT Upper vs Rank"
+xlab = "SAT Upper"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("sat_upper.png")
+
+```
+
+# Plot ACT lower vs rank
+```{r}
+
+xval <- forbesraw$ACT.Lower
+yval <- forbesraw$Rank
+
+titlelab = "ACT Lower vs Rank"
+xlab = "ACT Lower"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("act_lower.png")
+
+```
+
+# Plot ACT upper vs rank
+```{r}
+
+xval <- forbesraw$ACT.Upper
+yval <- forbesraw$Rank
+
+titlelab = "ACT Upper vs Rank"
+xlab = "ACT Upper"
+ylab = "Rank"
+
+ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("act_upper.png")
+
+```
+
