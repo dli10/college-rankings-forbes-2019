@@ -28,6 +28,22 @@ colnames(forbesraw)
 #str(forbesraw)
 ```
 
+# Function to get trendline info
+```{r}
+
+getTrend <- function(dataset, xval, yval){
+  
+  slr1 = lm(formula = yval ~ xval, data = dataset)
+  intercept <- slr1$coefficients[1]
+  slope <- slr1$coefficients[2]
+  
+  return(slr1)
+  
+}
+
+```
+
+
 # Plot undergraduate population vs rank
 ```{r}
 
@@ -38,9 +54,16 @@ titlelab = "Undergraduate Population vs Rank"
 xlab = "Undergraduate Population"
 ylab = "Rank"
 
+
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("undergrad_pop.png")
@@ -57,9 +80,16 @@ titlelab = "Student Population vs Rank"
 xlab = "Student Population"
 ylab = "Rank"
 
+
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("student_pop.png")
@@ -76,9 +106,15 @@ titlelab = "Net Price vs Rank"
 xlab = "Net Price"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("net_price.png")
@@ -95,9 +131,15 @@ titlelab = "Average Grant Aid vs Rank"
 xlab = "Average Grant Aid"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("avg_grant_aid.png")
@@ -115,9 +157,15 @@ titlelab = "Total Annual Cost vs Rank"
 xlab = "Total Annual Cost"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("total_annual_cost.png")
@@ -134,9 +182,15 @@ titlelab = "Alumni Salary vs Rank"
 xlab = "Alumni Salary"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("alumni_salary.png")
@@ -153,9 +207,15 @@ titlelab = "Acceptance Rate vs Rank"
 xlab = "Acceptance Rate"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("accept_rate.png")
@@ -172,9 +232,15 @@ titlelab = "SAT Lower vs Rank"
 xlab = "SAT Lower"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("sat_lower.png")
@@ -191,9 +257,15 @@ titlelab = "SAT Upper vs Rank"
 xlab = "SAT Upper"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("sat_upper.png")
@@ -210,9 +282,15 @@ titlelab = "ACT Lower vs Rank"
 xlab = "ACT Lower"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("act_lower.png")
@@ -229,9 +307,15 @@ titlelab = "ACT Upper vs Rank"
 xlab = "ACT Upper"
 ylab = "Rank"
 
+slr1 = lm(formula = yval ~ xval, data = forbesraw)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
   labs(title = titlelab, x = xlab, y = ylab)
 
 #ggsave("act_upper.png")
