@@ -28,22 +28,6 @@ colnames(forbesraw)
 #str(forbesraw)
 ```
 
-# Function to get trendline info
-```{r}
-
-getTrend <- function(dataset, xval, yval){
-  
-  slr1 = lm(formula = yval ~ xval, data = dataset)
-  intercept <- slr1$coefficients[1]
-  slope <- slr1$coefficients[2]
-  
-  return(slr1)
-  
-}
-
-```
-
-
 # Plot undergraduate population vs rank
 ```{r}
 
@@ -60,6 +44,8 @@ summary(slr1)
 int <- slr1$coefficients[1]
 slp <- slr1$coefficients[2]
 
+#df_public = forbesraw[which(Public.Private=='Public')]
+
 ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
   geom_point(aes()) +
   #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
@@ -69,6 +55,61 @@ ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
 #ggsave("undergrad_pop.png")
 
 ```
+
+# Separate Public/Private
+```{r}
+
+df_public = forbesraw[which(forbesraw$Public.Private=='Public'),]
+
+xval <- df_public$Student.Population
+yval <- df_public$Rank
+
+titlelab = "Undergraduate Population vs Rank (Public Schools)"
+xlab = "Undergraduate Population"
+ylab = "Rank"
+
+
+slr1 = lm(formula = yval ~ xval, data = df_public)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
+ggplot(data = df_public, aes(x = xval, y = yval)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("undergrad_pop.png")
+
+```
+```{r}
+
+df_private = forbesraw[which(forbesraw$Public.Private=='Private'),]
+
+xval <- df_private$Student.Population
+yval <- df_private$Rank
+
+titlelab = "Undergraduate Population vs Rank (Private Schools)"
+xlab = "Undergraduate Population"
+ylab = "Rank"
+
+
+slr1 = lm(formula = yval ~ xval, data = df_private)
+summary(slr1)
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
+ggplot(data = df_private, aes(x = xval, y = yval)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
+  labs(title = titlelab, x = xlab, y = ylab)
+
+#ggsave("undergrad_pop.png")
+
+```
+
 
 # Plot student population vs rank
 ```{r}
@@ -170,7 +211,15 @@ ggplot(data = forbesraw, aes(x = xval, y = yval, color = Public.Private)) +
 
 #ggsave("total_annual_cost.png")
 
+zerocost <- which(xval == 0)
+
+forbesraw[zerocost[1], 2]
+forbesraw[zerocost[2], 2]
+forbesraw[zerocost[3], 2]
+forbesraw[zerocost[4], 2]
+
 ```
+
 
 # Plot alumni salary vs rank
 ```{r}
