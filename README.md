@@ -2,7 +2,7 @@
 
 ## A data visualization project for 2019 College Rankings by Forbes.
 
-The dataset (.csv) for this data visualization can be found in ForbesRanking.zip.
+The dataset (.csv) for this data visualization can be found in Forbes Ranking.zip.
 
 TrendLineGraphs codes for visualizing the data as is, plotting different data columns (i.e. undergraduate population, net price, etc.) vs college ranking. Each plot also includes trendlines calculated with either a linear regression model or a logistic regression model. The p-values and R-squared values are also calculated and included on each graph.
 
