@@ -2,7 +2,9 @@
 
 ## A data visualization project for 2019 College Rankings by Forbes.
 
-BasicGraphs codes for visualizing the data as is, plotting different data columns (i.e. undergraduate population, net price, etc.) vs college ranking. Each plot also includes a trendline calculated with a linear regression model.
+The dataset (.csv) for this data visualization can be found in ForbesRanking.zip.
+
+TrendLineGraphs codes for visualizing the data as is, plotting different data columns (i.e. undergraduate population, net price, etc.) vs college ranking. Each plot also includes trendlines calculated with either a linear regression model or a logistic regression model. The p-values and R-squared values are also calculated and included on each graph.
 
 KMeansClustering applies a k-means clustering method to the data that we have graphed in BasicGraphs. The outputted graphs indicate the clusters as well as the calculated centroids.
 
