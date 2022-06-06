@@ -1,0 +1,273 @@
+---
+title: "ANS198 Project 2"
+author: "Kaylyn Bunt"
+date: '2022-05-29'
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r}
+setwd("\\Users\\Lyzet\\Desktop\\ans198 project")
+forbes <- read.csv("ANS198.project.csv")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+install.packages("ggplot2", repos="https://cran.r-project.org/web/packages/ggplot2/index.html")
+install.packages("rlang", repos="https://cran.r-project.org/web/packages/rlang/index.html")
+library(ggplot2)
+```
+# Undergraduate Population
+```{r}
+
+xval <- forbes$Student.Population
+yval <- forbes$Rank
+
+titlelab = "Undergraduate Population vs Rank"
+xlab = "Undergraduate Population"
+ylab = "Rank"
+
+
+slr1 = lm(formula = yval ~ xval, data = forbes)
+summary(slr1)
+```
+
+```{r}
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+
+ggplot(data = forbes, aes(x = xval, y = yval, color = Public.Private)) +
+  geom_point(aes()) +
+  #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+  geom_abline(intercept = int, slope = slp, color = "red") +
+  labs(title = titlelab, x = xlab, y = ylab)+
+  annotate("text", x=55000,y=600,label="Adjusted R-squared:  0.01624")
+```
+# Student Population
+```{r}
+  xval <- forbes$Student.Population
+  yval <- forbes$Rank
+  
+  titlelab = "Student Population vs Rank"
+  xlab = "Student Population"
+  ylab = "Rank"
+  
+  
+  slr1 = lm(formula = yval ~ xval, data = forbes)
+  summary(slr1)
+```
+
+```{r}
+  int <- slr1$coefficients[1]
+  slp <- slr1$coefficients[2]
+  
+  ggplot(data = forbes, aes(x = xval, y = yval, color = Public.Private)) +
+    geom_point(aes()) +
+    #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+    geom_abline(intercept = int, slope = slp, color = "red") +
+    labs(title = titlelab, x = xlab, y = ylab)+
+    annotate("text", x=55000,y=600,label="Adjusted R-squared:  0.01624")
+```
+  # Net Price
+```{r}
+  xval <- forbes$Net.Price
+  yval <- forbes$Rank
+  
+  titlelab = "Net Price vs Rank"
+  xlab = "Net Price"
+  ylab = "Rank"
+  
+  slr1 = lm(formula = yval ~ xval, data = forbes)
+  summary(slr1)
+```
+
+```{r}
+  int <- slr1$coefficients[1]
+  slp <- slr1$coefficients[2]
+  
+  ggplot(data = forbes, aes(x = xval, y = yval, color = Public.Private)) +
+    geom_point(aes()) +
+    #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+    geom_abline(intercept = int, slope = slp, color = "red") +
+    labs(title = titlelab, x = xlab, y = ylab)+
+    annotate("text", x=40000,y=600,label="R-squared:0.1072")
+```
+# Average Grant Aid
+```{r}
+AvgAid=lm(Rank~Average.Grant.Aid, forbes)
+  summary(AvgAid)
+
+  ggplot(forbes, aes(Average.Grant.Aid,Rank, color=Public.Private))+
+    geom_point()+
+    geom_smooth(method = loess,se=0)+
+    annotate("text", x=c(43000,43000),y=c(530,480),
+             label=c("p-value: < 2.2e-16","R-squared:  0.1973"))+
+    labs(title= "Average Grant Aid vs. Rank",y= "Average Grant Aid",x="Rank")
+```
+# Total Annual Cost
+```{r}
+  xval <- forbes$Total.Annual.Cost
+  yval <- forbes$Rank
+  
+  titlelab = "Total Annual Cost vs Rank"
+  xlab = "Total Annual Cost"
+  ylab = "Rank"
+  
+  slr1 = lm(formula = yval ~ xval, data = forbes)
+  summary(slr1)
+```
+
+```{r}
+int <- slr1$coefficients[1]
+slp <- slr1$coefficients[2]
+  
+ggplot(data = forbes, aes(x = xval, y = yval, color = Public.Private)) +
+    geom_point(aes()) +
+    #geom_text(aes(label = Rank), hjust = "left", vjust = "top") +
+    geom_abline(intercept = int, slope = slp, color = "red") +
+    labs(title = titlelab, x = xlab, y = ylab)+
+  annotate("text", x=10000,y=200,label="R-squared:0.304")
+```
+# Alumni Salary
+```{r}
+alumni=lm(Rank~Alumni.Salary, forbes)
+summary(alumni)
+```
+
+```{r}
+ggplot(forbes, aes(Alumni.Salary,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=FALSE,fullrange=TRUE)+
+  annotate("text", x=c(135000,135000),y=c(580,530),
+           label=c("p-value: < 2.2e-16","R-squared:  0.5202"))+
+  labs(title= "Alumni Salary vs. Rank",ylab= "Alumni Salary",xlab="Rank")+
+  theme_gray(base_size = 12)
+```
+# Acceptance Rate
+```{r}
+Acceptance=lm(Rank~Acceptance.Rate, forbes)
+summary(Acceptance)
+```
+
+```{r}
+ggplot(forbes, aes(Acceptance.Rate,Rank, color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=FALSE)+
+  annotate("text", x=c(18,18),y=c(690,640),
+           label=c("p-value: < 2.2e-16","R-squared:0.3936"))+
+  labs(title= "Acceptance Rate vs. Rank",ylab= "Acceptance Rate",xlab="Rank")
+```
+# SAT Lower
+```{r}
+SAT=lm(Rank~SAT.Lower, forbes)
+summary(SAT)
+```
+
+```{r}
+ggplot(forbes, aes(SAT.Lower,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=0)+
+  annotate("text", x=c(1400,1400),y=c(500,450),
+           label=c("p-value: < 2.2e-16","R-squared:0.6954"))+
+  labs(title= "SAT Lower vs. Rank",ylab= "SAT Lower",xlab="Rank")
+```
+#SAT Upper
+```{r}
+Upper=lm(Rank~SAT.Upper, forbes)
+summary(Upper)
+```
+
+```{r}
+ggplot(forbes, aes(SAT.Upper,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=0)+
+  annotate("text", x=c(1500,1500),y=c(500,450),
+           label=c("p-value:< 2.2e-16","R-squared: 0.6756"))+
+  labs(title= "SAT Upper vs. Rank",ylab= "SAT Upper",xlab="Rank")
+```
+#ACT Lower
+```{r}
+Lower=lm(Rank~ACT.Lower, forbes)
+summary(Lower)
+```
+
+```{r}
+ggplot(forbes, aes(ACT.Lower,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=0)+
+  annotate("text", x=c(30,30),y=c(500,450),
+           label=c("p-value: < 2.2e-16","R-squared:0.7204"))+
+  labs(title= "ACT Lower vs. Rank",ylab= "ACT Lower",xlab="Rank")
+```
+# ACT Upper
+```{r}
+ACT=lm(Rank~ACT.Upper, forbes)
+summary(ACT)
+```
+
+```{r}
+ggplot(forbes, aes(ACT.Upper,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=0)+
+  annotate("text", x=c(24,24),y=c(100,50),
+           label=c("p-value: < 2.2e-16","R-squared:0.6893"))+
+  labs(title= "ACT Upper vs. Rank",ylab= "ACT Upper",xlab="Rank")
+```
+# SAT Lower
+```{r}
+SAT=lm(Rank~SAT.Lower, forbes)
+summary(SAT)
+```
+
+```{r}
+ggplot(forbes, aes(SAT.Lower,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=0)+
+  annotate("text", x=c(1400,1400),y=c(500,450),
+           label=c("p-value: < 2.2e-16","R-squared:0.6954"))+
+  labs(title= "SAT Lower vs. Rank",ylab= "SAT Lower",xlab="Rank")
+```
+#SAT Upper
+```{r}
+Upper=lm(Rank~SAT.Upper, forbes)
+summary(Upper)
+```
+
+```{r}
+ggplot(forbes, aes(SAT.Upper,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=0)+
+  annotate("text", x=c(1500,1500),y=c(500,450),
+           label=c("p-value:< 2.2e-16","R-squared: 0.6756"))+
+  labs(title= "SAT Upper vs. Rank",ylab= "SAT Upper",xlab="Rank")
+```
+#ACT Lower
+```{r}
+Lower=lm(Rank~ACT.Lower, forbes)
+summary(Lower)
+```
+
+```{r}
+ggplot(forbes, aes(ACT.Lower,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=0)+
+  annotate("text", x=c(30,30),y=c(500,450),
+           label=c("p-value: < 2.2e-16","R-squared:0.7204"))+
+  labs(title= "ACT Lower vs. Rank",ylab= "ACT Lower",xlab="Rank")
+```
+# ACT Upper
+```{r}
+ACT=lm(Rank~ACT.Upper, forbes)
+summary(ACT)
+```
+
+```{r}
+ggplot(forbes, aes(ACT.Upper,Rank,color=Public.Private))+
+  geom_point()+
+  geom_smooth(method = loess,se=0)+
+  annotate("text", x=c(24,24),y=c(100,50),
+           label=c("p-value: < 2.2e-16","R-squared:0.6893"))+
+  labs(title= "ACT Upper vs. Rank",ylab= "ACT Upper",xlab="Rank")
+```
